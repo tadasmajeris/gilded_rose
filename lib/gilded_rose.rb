@@ -23,9 +23,7 @@ class GildedRose
         end
       end
 
-      if item.name != SULFURAS
-        item.sell_in = item.sell_in - 1
-      end
+      age_one_day(item)
 
       if item.sell_in < 0
         if item.name == BRIE
@@ -50,10 +48,16 @@ class GildedRose
   end
 
   def degrade(item)
-    item.quality -= 1 if item.quality > 0
+    if item.name != SULFURAS && item.quality > 0
+      item.quality -= 1
+    end
   end
 
   def upgrade(item)
     item.quality += 1 if item.quality < 50
+  end
+
+  def age_one_day(item)
+    item.sell_in -= 1 if item.name != SULFURAS
   end
 end

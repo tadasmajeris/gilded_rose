@@ -46,6 +46,10 @@ describe GildedRose do
     it 'cant degrade to less than 0 quality' do
       expect { inn.degrade(broken_shovel) }.not_to change { broken_shovel.quality }
     end
+
+    it 'cant degrade quality of "Sulfuras, Hand of Ragnaros"' do
+      expect { inn.degrade(sulfuras) }.not_to change { sulfuras.quality }
+    end
   end
 
   describe '#upgrade' do
@@ -55,6 +59,16 @@ describe GildedRose do
 
     it 'cant upgrade to more than 50 quality' do
       expect { inn.upgrade(perfect_brie) }.not_to change { perfect_brie.quality }
+    end
+  end
+
+  describe '#age_one_day' do
+    it 'decreases items sell_in value by 1' do
+      expect { inn.age_one_day(brie) }.to change { brie.sell_in }.by(-1)
+    end
+
+    it 'doesnt age the "Sulfuras, Hand of Ragnaros"' do
+      expect { inn.age_one_day(sulfuras) }.not_to change { sulfuras.sell_in }
     end
   end
 
