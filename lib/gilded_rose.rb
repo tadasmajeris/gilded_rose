@@ -46,13 +46,11 @@ class GildedRose
   end
 
   def degrading_quality?(item)
-    !UPGRADING_ITEMS.include? item.name
+    !UPGRADING_ITEMS.include?(item.name) && item.name != SULFURAS
   end
 
   def degrade(item)
-    if item.name != SULFURAS && item.quality > 0
-      item.quality -= 1
-    end
+    item.quality -= 1 if item.quality > 0
   end
 
   def upgrade(item)

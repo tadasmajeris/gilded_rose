@@ -29,6 +29,10 @@ describe GildedRose do
       expect(inn.degrading_quality?(passes)).to be false
     end
 
+    it 'returns false if items name is "Sulfuras, Hand of Ragnaros"' do
+      expect(inn.degrading_quality?(sulfuras)).to be false
+    end
+
     it 'returns true if item is of degrading quality' do
       expect(inn.degrading_quality?(shovel)).to be true
     end
@@ -42,10 +46,6 @@ describe GildedRose do
     it 'cant degrade to less than 0 quality' do
       expect { inn.degrade(broken_shovel) }.not_to change { broken_shovel.quality }
     end
-
-    it 'cant degrade quality of "Sulfuras, Hand of Ragnaros"' do
-      expect { inn.degrade(sulfuras) }.not_to change { sulfuras.quality }
-    end
   end
 
   describe '#upgrade' do
@@ -57,7 +57,5 @@ describe GildedRose do
       expect { inn.upgrade(perfect_brie) }.not_to change { perfect_brie.quality }
     end
   end
-
-
 
 end
