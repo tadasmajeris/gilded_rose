@@ -37,4 +37,11 @@ describe GildedRose do
     end
   end
 
+  describe '#upgrade' do
+    it 'upgrades items quality by 1' do
+      expect { inn.upgrade(brie) }.to change { brie.quality }.by(1)
+    end
+  end
+
+
 end

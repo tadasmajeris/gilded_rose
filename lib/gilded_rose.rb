@@ -15,7 +15,7 @@ class GildedRose
       if degrading_quality?(item)
         if item.quality > 0
           if item.name != SULFURAS
-            item.quality = item.quality - 1
+            degrade(item)
           end
         end
 
@@ -26,12 +26,12 @@ class GildedRose
           if item.name == PASSES
             if item.sell_in < 11
               if item.quality < 50
-                item.quality = item.quality + 1
+                upgrade(item)
               end
             end
             if item.sell_in < 6
               if item.quality < 50
-                item.quality = item.quality + 1
+                upgrade(item)
               end
             end
           end
@@ -48,7 +48,7 @@ class GildedRose
           if item.name != PASSES
             if item.quality > 0
               if item.name != SULFURAS
-                item.quality = item.quality - 1
+                degrade(item)
               end
             end
           else
@@ -56,7 +56,7 @@ class GildedRose
           end
         else
           if item.quality < 50
-            item.quality = item.quality + 1
+            upgrade(item)
           end
         end
       end
@@ -74,5 +74,9 @@ class GildedRose
 
   def degrade(item)
     item.quality -= 1
+  end
+
+  def upgrade(item)
+    item.quality += 1
   end
 end
