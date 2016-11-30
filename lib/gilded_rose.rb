@@ -28,14 +28,12 @@ class GildedRose
       end
 
       if item.sell_in < 0
-        if item.name != BRIE
-          if item.name != PASSES
-            degrade(item)
-          else
-            item.quality = 0
-          end
-        else
+        if item.name == BRIE
           upgrade(item)
+        elsif item.name == PASSES
+          item.quality = 0
+        else
+          degrade(item)
         end
       end
 
