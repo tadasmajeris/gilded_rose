@@ -6,6 +6,7 @@ describe GildedRose do
   let(:brie) { Item.new('Aged Brie', 3, 0) }
   let(:passes) { Item.new('Backstage passes to a TAFKAL80ETC concert', 3, 3) }
   let(:shovel) { Item.new('shovel', 2, 3) }
+  let(:perfect_brie) { Item.new('perfect_brie', 2, 50) }
   let(:inn) { GildedRose.new([brie, passes, shovel]) }
 
   describe "#update_quality" do
@@ -40,6 +41,10 @@ describe GildedRose do
   describe '#upgrade' do
     it 'upgrades items quality by 1' do
       expect { inn.upgrade(brie) }.to change { brie.quality }.by(1)
+    end
+
+    it 'cant upgrade to more than 50 quality' do
+      expect { inn.upgrade(perfect_brie) }.not_to change { perfect_brie.quality }
     end
   end
 

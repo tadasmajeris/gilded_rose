@@ -25,14 +25,10 @@ class GildedRose
           item.quality = item.quality + 1
           if item.name == PASSES
             if item.sell_in < 11
-              if item.quality < 50
-                upgrade(item)
-              end
+              upgrade(item)
             end
             if item.sell_in < 6
-              if item.quality < 50
-                upgrade(item)
-              end
+              upgrade(item)
             end
           end
         end
@@ -55,9 +51,7 @@ class GildedRose
             item.quality = item.quality - item.quality
           end
         else
-          if item.quality < 50
-            upgrade(item)
-          end
+          upgrade(item)
         end
       end
 
@@ -77,6 +71,6 @@ class GildedRose
   end
 
   def upgrade(item)
-    item.quality += 1
+    item.quality += 1 if item.quality < 50
   end
 end
