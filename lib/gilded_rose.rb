@@ -10,15 +10,11 @@ class GildedRose
   UPGRADING_ITEMS = [BRIE, PASSES]
 
   def update_quality()
+
     @items.each do |item|
 
       if degrading_quality?(item)
-        if item.quality > 0
-          if item.name != SULFURAS
-            degrade(item)
-          end
-        end
-
+        degrade(item)
       else
 
         if item.quality < 50
@@ -48,7 +44,7 @@ class GildedRose
               end
             end
           else
-            item.quality = item.quality - item.quality
+            item.quality = 0
           end
         else
           upgrade(item)
@@ -56,6 +52,7 @@ class GildedRose
       end
 
     end
+
   end
 
   def items
@@ -67,7 +64,9 @@ class GildedRose
   end
 
   def degrade(item)
-    item.quality -= 1
+    if item.name != SULFURAS && item.quality > 0
+      item.quality -= 1
+    end
   end
 
   def upgrade(item)

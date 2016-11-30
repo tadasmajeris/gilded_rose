@@ -6,8 +6,10 @@ describe GildedRose do
   let(:brie) { Item.new('Aged Brie', 3, 0) }
   let(:passes) { Item.new('Backstage passes to a TAFKAL80ETC concert', 3, 3) }
   let(:shovel) { Item.new('shovel', 2, 3) }
+  let(:broken_shovel) { Item.new('broken_shovel', 1, 0) }
   let(:perfect_brie) { Item.new('perfect_brie', 2, 50) }
-  let(:inn) { GildedRose.new([brie, passes, shovel]) }
+  let(:sulfuras) { Item.new('Sulfuras, Hand of Ragnaros', 0, 80) }
+  let(:inn) { GildedRose.new([brie, passes, shovel, broken_shovel, perfect_brie]) }
 
   describe "#update_quality" do
     it "does not change the name" do
@@ -36,6 +38,14 @@ describe GildedRose do
     it 'degrades items quality by 1' do
       expect { inn.degrade(shovel) }.to change { shovel.quality }.by(-1)
     end
+
+    it 'cant degrade to less than 0 quality' do
+      expect { inn.degrade(broken_shovel) }.not_to change { broken_shovel.quality }
+    end
+
+    it 'cant degrade quality of "Sulfuras, Hand of Ragnaros"' do
+      expect { inn.degrade(sulfuras) }.not_to change { sulfuras.quality }
+    end
   end
 
   describe '#upgrade' do
@@ -47,6 +57,7 @@ describe GildedRose do
       expect { inn.upgrade(perfect_brie) }.not_to change { perfect_brie.quality }
     end
   end
+
 
 
 end
