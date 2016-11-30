@@ -13,7 +13,6 @@ class GildedRose
     @items.each do |item|
 
       if degrading_quality?(item)
-        # degrade(item)
         if item.quality > 0
           if item.name != SULFURAS
             item.quality = item.quality - 1
@@ -71,5 +70,9 @@ class GildedRose
 
   def degrading_quality?(item)
     !UPGRADING_ITEMS.include? item.name
+  end
+
+  def degrade(item)
+    item.quality -= 1
   end
 end

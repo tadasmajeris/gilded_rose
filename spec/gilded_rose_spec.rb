@@ -33,9 +33,7 @@ describe GildedRose do
 
   describe '#degrade' do
     it 'degrades items quality by 1' do
-      item = Item.new('crown', 1, 5)
-      inn = GildedRose.new([item])
-
+      expect { inn.degrade(shovel) }.to change { shovel.quality }.by(-1)
     end
   end
 
